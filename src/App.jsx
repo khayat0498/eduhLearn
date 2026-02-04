@@ -372,7 +372,7 @@ export default function App() {
   };
 
   return (
-    <div className="app">
+    <div className="app" onContextMenu={(e) => e.preventDefault()}>
       <header className="topbar simple">
         <div className="brand">
           <div className="logo">Δ</div>
@@ -534,15 +534,19 @@ export default function App() {
             </div>
           </div>
 
-          {/* Feedback bottom-sheet */}
+          {/* Feedback drawer */}
           <div
             className={`try-feedback${feedback || feedbackOpen ? " show" : ""}`}
           >
-            <button
-              className="feedback-drag"
-              onClick={() => setFeedbackOpen((v) => !v)}
-            />
-            <div className="feedback-title">Feedback</div>
+            <div className="feedback-header">
+              <div className="feedback-title">Feedback</div>
+              <button
+                className="feedback-close"
+                onClick={() => setFeedbackOpen(false)}
+              >
+                ←
+              </button>
+            </div>
             <div className="feedback-body" ref={feedbackRef}>
               {!feedback && "Awaiting submission..."}
             </div>

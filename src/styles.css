@@ -698,12 +698,35 @@ h1 {
   box-shadow: var(--shadow);
 }
 
+.feedback-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-bottom: 8px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  margin-bottom: 8px;
+}
+
 .feedback-title {
   font-size: 12px;
   text-transform: uppercase;
   letter-spacing: 0.12em;
   color: #f7d77b;
-  margin-bottom: 8px;
+}
+
+.feedback-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  background: rgba(255, 255, 255, 0.08);
+  font-size: 16px;
+  color: #e8e2d5;
+  cursor: pointer;
+  padding: 0;
 }
 
 .feedback-body {
@@ -1035,11 +1058,11 @@ h1 {
     width: 100%;
   }
 
-  /* feedback — o'ng drawer */
+  /* feedback — chap drawer */
   .try-feedback {
     position: fixed;
     top: 0;
-    right: 0;
+    left: 0;
     z-index: 88;
     width: 85vw;
     max-width: 360px;
@@ -1047,10 +1070,10 @@ h1 {
     height: 100dvh;
     overflow-y: auto;
     border-radius: 0;
-    border-left: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: -4px 0 24px rgba(0, 0, 0, 0.2);
+    border-right: 1px solid rgba(255, 255, 255, 0.1);
+    box-shadow: 4px 0 24px rgba(0, 0, 0, 0.2);
     padding: 10px;
-    transform: translateX(100%);
+    transform: translateX(-100%);
     transition: transform 0.3s ease;
   }
 
