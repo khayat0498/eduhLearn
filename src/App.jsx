@@ -288,6 +288,7 @@ export default function App() {
 
   const startTry = async () => {
     setTryMode(true);
+    setQuestionOpen(true);
     setStatus("Loading question");
     setFeedback("");
     setOcrText("");
