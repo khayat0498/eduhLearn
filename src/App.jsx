@@ -90,12 +90,38 @@ export default function App() {
   }, [tokenCount]);
 
   useEffect(() => {
-    const prevent = (e) => e.preventDefault();
-    document.addEventListener("contextmenu", prevent, { passive: false });
-    document.addEventListener("selectstart", prevent, { passive: false });
+    const prevent = (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      return false;
+    };
+    const opts = { capture: true, passive: false };
+    document.addEventListener("contextmenu", prevent, opts);
+    document.addEventListener("selectstart", prevent, opts);
+    window.addEventListener("contextmenu", prevent, opts);
+
+    // iOS long press workaround
+    let timer = null;
+    const onTouchStart = () => {
+      timer = setTimeout(() => {
+        document.body.style.webkitUserSelect = "none";
+      }, 300);
+    };
+    const onTouchEnd = () => {
+      clearTimeout(timer);
+    };
+    document.addEventListener("touchstart", onTouchStart, { passive: true });
+    document.addEventListener("touchend", onTouchEnd, { passive: true });
+    document.addEventListener("touchcancel", onTouchEnd, { passive: true });
+
     return () => {
-      document.removeEventListener("contextmenu", prevent);
-      document.removeEventListener("selectstart", prevent);
+      document.removeEventListener("contextmenu", prevent, opts);
+      document.removeEventListener("selectstart", prevent, opts);
+      window.removeEventListener("contextmenu", prevent, opts);
+      document.removeEventListener("touchstart", onTouchStart);
+      document.removeEventListener("touchend", onTouchEnd);
+      document.removeEventListener("touchcancel", onTouchEnd);
+      clearTimeout(timer);
     };
   }, []);
 
