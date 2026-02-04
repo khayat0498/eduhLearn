@@ -447,7 +447,7 @@ export default function App() {
                 className="question-close"
                 onClick={() => setQuestionOpen(false)}
               >
-                ←
+                →
               </button>
             </div>
             <div ref={mathRef} className="math-display" />
