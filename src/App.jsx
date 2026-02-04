@@ -90,6 +90,16 @@ export default function App() {
   }, [tokenCount]);
 
   useEffect(() => {
+    const prevent = (e) => e.preventDefault();
+    document.addEventListener("contextmenu", prevent, { passive: false });
+    document.addEventListener("selectstart", prevent, { passive: false });
+    return () => {
+      document.removeEventListener("contextmenu", prevent);
+      document.removeEventListener("selectstart", prevent);
+    };
+  }, []);
+
+  useEffect(() => {
     const canvas = canvasRef.current;
     const wrap = wrapRef.current;
     if (!canvas || !wrap) return;
@@ -357,14 +367,17 @@ export default function App() {
       const data = await response.json();
       if (!response.ok) {
         setFeedback(data?.details || data?.error || "Check failed");
+        setFeedbackOpen(true);
         setStatus("Check failed");
         return;
       }
       setFeedback(data?.feedback || "");
+      setFeedbackOpen(true);
       addTokens(data?.tokenCount || 0);
       setStatus("Checked");
     } catch (err) {
       setFeedback(err.message || "Check failed");
+      setFeedbackOpen(true);
       setStatus("Check failed");
     } finally {
       setIsOcrLoading(false);
@@ -536,7 +549,7 @@ export default function App() {
 
           {/* Feedback drawer */}
           <div
-            className={`try-feedback${feedback || feedbackOpen ? " show" : ""}`}
+            className={`try-feedback${feedbackOpen ? " show" : ""}`}
           >
             <div className="feedback-header">
               <div className="feedback-title">Feedback</div>
