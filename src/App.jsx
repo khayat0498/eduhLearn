@@ -470,6 +470,7 @@ export default function App() {
                 onPointerUp={handleEnd}
                 onPointerLeave={handleEnd}
                 onPointerCancel={handleEnd}
+                onContextMenu={(e) => e.preventDefault()}
               />
               <div className="canvas-hint">Write your answer here</div>
             </div>
