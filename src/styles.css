@@ -508,6 +508,14 @@ h1 {
   box-shadow: var(--shadow);
 }
 
+.try-mode,
+.try-mode * {
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+  -webkit-user-drag: none;
+}
+
 .try-mode {
   position: fixed;
   inset: 0;
@@ -519,9 +527,6 @@ h1 {
   z-index: 50;
   overflow-y: auto;
   overflow-x: hidden;
-  -webkit-user-select: none;
-  user-select: none;
-  -webkit-touch-callout: none;
 }
 
 .question-toggle,
