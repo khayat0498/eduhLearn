@@ -422,7 +422,7 @@ export default function App() {
       )}
 
       {tryMode && (
-        <section className="try-mode">
+        <section className="try-mode" onContextMenu={(e) => e.preventDefault()}>
           {/* Floating: question toggle (chap) */}
           <button
             className="question-toggle"
